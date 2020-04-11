@@ -1,1 +1,1 @@
-# clearMIPT
+# just go away
