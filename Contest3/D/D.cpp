@@ -1,9 +1,12 @@
 #include <cstddef>
+#include <cstdlib>
 #include <iostream>
+#include <algorithm>
 #include <fstream>
 #include <istream>
 #include <iterator>
 #include <ostream>
+#include <string>
 #include <type_traits>
 
 
@@ -36,18 +39,17 @@ private:
         delete cur;
     }
     AVLTreeNode *root;
-    size_t size;
     
 
 public:
     
-    AVLTree() : size(0), root(nullptr){}
-    AVLTree(key_t key) : size(1) { root = new AVLTreeNode(key); }
+    int k;
+    AVLTree() : root(nullptr), k(0){}
+    AVLTree(key_t key) : k(0){ root = new AVLTreeNode(key); }
     
     ~AVLTree() 
     {
         deleteNodes(root);
-        size = 0;
         root = nullptr;
     }
     
@@ -196,35 +198,134 @@ public:
                 return left;
             AVLTreeNode *min = findMin(right);
             min->right = removeMin(right);
-            min->right = left;
+            min->left = left;
+            
             return balance(min);
         }
         return balance(cur);
     }
-    AVLTreeNode *remove (key_t key)
-    {
-        return removeIter(root, key);
+
+    void remove (key_t key) {
+        if (!root) return;
+        if (root->getKey() == key && root->sub_tree_size == 1) {
+            delete root;
+            root = nullptr;
+            return;
+        }
+        else if (root->getKey() == key) 
+            root = removeIter(root, key);
+        else removeIter(root, key);
+
     }
 
+    
+    AVLTreeNode *findMaxIter (int k, AVLTreeNode *cur)
+    {
+        
+ 
+        int curK = 1;
+        if (cur->right != nullptr) {
+            curK += cur->right->sub_tree_size;
+        }
+    
+        if (k == curK) {
+            return cur;
+        } else if (k < curK) {
+            return findMaxIter(k, cur->right);
+        } else {
+            return findMaxIter(k - curK, cur->left);
+        }
+        /*if (!cur) 
+            return nullptr;
+        AVLTreeNode *right = findMaxIter(cur->right);
+        if (right)
+            return right;
+
+        this->k--;
+        if (k == 0)
+            return cur;
+        
+        return findMaxIter(cur->left);*/
+
+    }
+
+    key_t findKthMax (int k) { this->k = k; return findMaxIter(k, root)->getKey(); }
     
 
 };
 
 int main()
 {
-    AVLTree <int> tree;
-    tree.insert(1);
-    tree.insert(1);
-    tree.insert(2);
-    tree.insert(2);
-    tree.insert(-1);
-    tree.insert(-1);
-    tree.remove(-1);
-    tree.showTree();
-    /*int n = 0;
-    std::cin >> n;
-    for (int i = 0; i < n; ++i) {
+    AVLTree <long> tree;
 
+    /*long *arr = new long [100000];
+    int qty = 0;
+    for (int i = 0; i < 100000; ++i) {
+        int coin = random()%3;
+        if (coin == 0) { //insert
+            long tmp = random()%1000;
+            tree.insert(tmp);
+            arr[qty++] = tmp;
+            std::sort(arr, arr+qty);
+            std::cout << "insert " << tmp << "\n";
+        }
+        if (coin == 1) { //remove
+            if (qty > 0){
+                long tmp = random()%qty;
+                std::cout << "remove " << arr[tmp] << "\n";
+                tree.remove(arr[tmp]);
+                for (int j = tmp; j < qty-1; j++) {
+                    arr[j] = arr[j+1];
+                }
+                qty--;
+            }
+        }
+        if (coin == 2) { //find max
+            if (qty > 0) {
+                long tmp = random()%qty;
+                long tmp2 = tree.findKthMax(tmp+1);
+                std::cout << "find " << tmp << "'s maximum\n";
+                if (tmp2 != arr[qty-tmp-1]) {
+                    std::cout << "ERROR! must be: " << arr[qty-tmp-1] << " is: " << tmp2 << "\n";
+                    for (int j = 0; j < qty; ++j ) {
+                        std::cout << arr[j] << " ";
+                    }
+                    std::cout << "\n";
+                    tree.showTree();
+                    break;
+                }
+            }
+        }
+        //tree.showTree();
     }*/
+
+    
+
+    int n = 0;
+    std::cin >> n;
+    char format = 0;
+    long tmp = 0;
+    for (int i = 0; i < n; ++i) {
+        std::cin >> format;
+        switch (format) {
+            case '+':
+                std::cin >> format >> tmp;
+                tree.insert(tmp);
+                break;
+            case '1':
+                std:: cin >> tmp;
+                tree.insert(tmp);
+                break;
+            case '0':
+                std::cin >> tmp;
+                std::cout << tree.findKthMax(tmp) << "\n";
+                break;
+            case '-':
+                std::cin >> format >> tmp;
+                tree.remove(tmp);
+                break;
+        }
+        //tree.showTree();
+    }
     return 0;
 }

@@ -1,10 +1,150 @@
 digraph {
-6381168 [ label = "key = 1
+6386400 [ label = "key = 497
+ height = 6
+ size = 30
+ balance = -1" ]
+6386400 -> 6386640
+6386400 -> 6386448
+6386640 [ label = "key = 304
+ height = 5
+ size = 17
+ balance = 1" ]
+6386640 -> 6387072
+6386640 -> 6386880
+6387072 [ label = "key = 127
+ height = 3
+ size = 7
+ balance = 0" ]
+6387072 -> 6387216
+6387072 -> 6387696
+6387216 [ label = "key = 59
+ height = 2
+ size = 3
+ balance = 0" ]
+6387216 -> 6386688
+6387216 -> 6385264
+6386688 [ label = "key = 19
+ height = 1
+ size = 1
+ balance = 0" ]
+6385264 [ label = "key = 84
+ height = 1
+ size = 1
+ balance = 0" ]
+6387696 [ label = "key = 260
+ height = 2
+ size = 3
+ balance = 0" ]
+6387696 -> 6387120
+6387696 -> 6387504
+6387120 [ label = "key = 255
+ height = 1
+ size = 1
+ balance = 0" ]
+6387504 [ label = "key = 290
+ height = 1
+ size = 1
+ balance = 0" ]
+6386880 [ label = "key = 358
+ height = 4
+ size = 9
+ balance = 0" ]
+6386880 -> 6387168
+6386880 -> 6387408
+6387168 [ label = "key = 340
+ height = 3
+ size = 4
+ balance = -1" ]
+6387168 -> 6387360
+6387168 -> 6387552
+6387360 [ label = "key = 309
  height = 2
  size = 2
  balance = 1" ]
-6381168 -> 6381216
-6381216 [ label = "key = 2
+6387360 -> 6387648
+6387648 [ label = "key = 314
+ height = 1
+ size = 1
+ balance = 0" ]
+6387552 [ label = "key = 355
+ height = 1
+ size = 1
+ balance = 0" ]
+6387408 [ label = "key = 425
+ height = 3
+ size = 4
+ balance = 1" ]
+6387408 -> 6386928
+6387408 -> 6387600
+6386928 [ label = "key = 390
+ height = 1
+ size = 1
+ balance = 0" ]
+6387600 [ label = "key = 479
+ height = 2
+ size = 2
+ balance = -1" ]
+6387600 -> 6387264
+6387264 [ label = "key = 459
+ height = 1
+ size = 1
+ balance = 0" ]
+6386448 [ label = "key = 729
+ height = 4
+ size = 12
+ balance = 0" ]
+6386448 -> 6386352
+6386448 -> 6386784
+6386352 [ label = "key = 624
+ height = 3
+ size = 6
+ balance = 0" ]
+6386352 -> 6387024
+6386352 -> 6386736
+6387024 [ label = "key = 542
+ height = 2
+ size = 3
+ balance = 0" ]
+6387024 -> 6386496
+6387024 -> 6386832
+6386496 [ label = "key = 498
+ height = 1
+ size = 1
+ balance = 0" ]
+6386832 [ label = "key = 590
+ height = 1
+ size = 1
+ balance = 0" ]
+6386736 [ label = "key = 658
+ height = 2
+ size = 2
+ balance = -1" ]
+6386736 -> 6387456
+6387456 [ label = "key = 626
+ height = 1
+ size = 1
+ balance = 0" ]
+6386784 [ label = "key = 797
+ height = 3
+ size = 5
+ balance = 1" ]
+6386784 -> 6387312
+6386784 -> 6386592
+6387312 [ label = "key = 761
+ height = 1
+ size = 1
+ balance = 0" ]
+6386592 [ label = "key = 927
+ height = 2
+ size = 3
+ balance = 0" ]
+6386592 -> 6386544
+6386592 -> 6386976
+6386544 [ label = "key = 900
+ height = 1
+ size = 1
+ balance = 0" ]
+6386976 [ label = "key = 994
  height = 1
  size = 1
  balance = 0" ]
