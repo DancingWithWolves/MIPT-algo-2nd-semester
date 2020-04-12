@@ -1,6 +1,7 @@
 #include <cstddef>
 #include <cstdlib>
 #include <iostream>
+#include <random>
 #include <algorithm>
 #include <fstream>
 #include <istream>
@@ -19,7 +20,6 @@ private:
 
         private:
             key_t key;
-
         public:
             size_t sub_tree_size, height;
             AVLTreeNode *left, *right;
@@ -42,10 +42,9 @@ private:
     
 
 public:
-    
-    int k;
-    AVLTree() : root(nullptr), k(0){}
-    AVLTree(key_t key) : k(0){ root = new AVLTreeNode(key); }
+
+    AVLTree() : root(nullptr){}
+    AVLTree(key_t key){ root = new AVLTreeNode(key); }
     
     ~AVLTree() 
     {
@@ -168,10 +167,7 @@ public:
         system( "eog tree_image.png" );
     }
 
-    AVLTreeNode *findMin (AVLTreeNode *cur)
-    {
-        return cur->left ? findMin(cur->left) : cur;
-    }
+    AVLTreeNode *findMin (AVLTreeNode *cur) { return cur->left ? findMin(cur->left) : cur; }
 
     AVLTreeNode *removeMin (AVLTreeNode *cur)
     {
@@ -221,49 +217,35 @@ public:
     
     AVLTreeNode *findMaxIter (int k, AVLTreeNode *cur)
     {
-        
- 
         int curK = 1;
-        if (cur->right != nullptr) {
-            curK += cur->right->sub_tree_size;
-        }
+        if (cur->right != nullptr) 
+            curK += cur->right->sub_tree_size;       
     
-        if (k == curK) {
+        if (k == curK) 
             return cur;
-        } else if (k < curK) {
+         else if (k < curK) 
             return findMaxIter(k, cur->right);
-        } else {
+         else 
             return findMaxIter(k - curK, cur->left);
-        }
-        /*if (!cur) 
-            return nullptr;
-        AVLTreeNode *right = findMaxIter(cur->right);
-        if (right)
-            return right;
-
-        this->k--;
-        if (k == 0)
-            return cur;
-        
-        return findMaxIter(cur->left);*/
-
+    
     }
 
-    key_t findKthMax (int k) { this->k = k; return findMaxIter(k, root)->getKey(); }
+    key_t findKthMax (int k) { return findMaxIter(k, root)->getKey(); }
     
 
 };
 
-int main()
+
+void stressTest ()
 {
     AVLTree <long> tree;
 
-    /*long *arr = new long [100000];
+    long *arr = new long [100000];
     int qty = 0;
     for (int i = 0; i < 100000; ++i) {
-        int coin = random()%3;
+        int coin = std::rand()%3;
         if (coin == 0) { //insert
-            long tmp = random()%1000;
+            long tmp = std::rand()%1000;
             tree.insert(tmp);
             arr[qty++] = tmp;
             std::sort(arr, arr+qty);
@@ -271,7 +253,7 @@ int main()
         }
         if (coin == 1) { //remove
             if (qty > 0){
-                long tmp = random()%qty;
+                long tmp = std::rand()%qty;
                 std::cout << "remove " << arr[tmp] << "\n";
                 tree.remove(arr[tmp]);
                 for (int j = tmp; j < qty-1; j++) {
@@ -282,7 +264,7 @@ int main()
         }
         if (coin == 2) { //find max
             if (qty > 0) {
-                long tmp = random()%qty;
+                long tmp = std::rand()%qty;
                 long tmp2 = tree.findKthMax(tmp+1);
                 std::cout << "find " << tmp << "'s maximum\n";
                 if (tmp2 != arr[qty-tmp-1]) {
@@ -296,16 +278,21 @@ int main()
                 }
             }
         }
-        //tree.showTree();
-    }*/
+        tree.showTree();
+    }
 
-    
+}
+int main()
+{
+    AVLTree <long> tree;
 
     int n = 0;
     std::cin >> n;
     char format = 0;
     long tmp = 0;
+
     for (int i = 0; i < n; ++i) {
+
         std::cin >> format;
         switch (format) {
             case '+':
@@ -325,7 +312,6 @@ int main()
                 tree.remove(tmp);
                 break;
         }
-        //tree.showTree();
     }
     return 0;
 }
