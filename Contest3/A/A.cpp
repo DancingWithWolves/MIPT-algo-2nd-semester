@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <istream>
+#include <iterator>
+#include <ostream>
 #include <type_traits>
 
 
@@ -39,19 +41,20 @@ private:
 
 public:
     
-    AVLTree() : size(0){}
+    AVLTree() : size(0), root(nullptr){}
     AVLTree(key_t key) : size(1) { root = new AVLTreeNode(key); }
     
     ~AVLTree() 
     {
         deleteNodes(root);
         size = 0;
+        root = nullptr;
     }
-
     
     size_t getHeight (AVLTreeNode *cur) { return !cur ? 0 : cur->height; }
     size_t getSubTreeSize (AVLTreeNode *cur) { return !cur ? 0 : cur->sub_tree_size; }
     int getBalance (AVLTreeNode *cur) { return getHeight(cur->right) - getHeight(cur->left); }
+
     void fixHeightAndSize (AVLTreeNode *cur) 
     {  
         int height_left = getHeight(cur->left);
@@ -65,7 +68,6 @@ public:
 
     AVLTreeNode *rotateRight (AVLTreeNode *cur)
     {
-        
         AVLTreeNode *tmp = cur->left;
         cur->left = tmp->right;
         tmp->right = cur;
@@ -89,16 +91,19 @@ public:
     AVLTreeNode *balance (AVLTreeNode *cur)
     {
         fixHeightAndSize(cur);
+
         if (getBalance(cur) == 2) {
             if (getBalance(cur->right) < 0)
                 cur->right = rotateRight(cur->right);
             return rotateLeft(cur);
         }
+
         if( getBalance(cur) == -2 ) {
             if (getBalance(cur->left) > 0  )
                 cur->left = rotateLeft(cur->left);
             return rotateRight(cur);
         }
+
         return cur;
     }
 
@@ -111,10 +116,17 @@ public:
             cur->left = insertIter(cur->left, key);
         else if (key > cur->getKey())
             cur->right = insertIter(cur->right, key);
-        else return nullptr;
         return balance(cur);
     }
-    AVLTreeNode *insert(key_t key) { return insertIter(root, key); }
+
+    AVLTreeNode *insert(key_t key) 
+    {
+        if (!root) {
+            root = new AVLTreeNode(key);
+            return root;
+        }
+        return insertIter(root, key); 
+    }
     
     
     const char* vizFileName = "tree.gpvz";
@@ -155,24 +167,57 @@ public:
         system( "eog tree_image.png" );
     }
 
+    key_t next (key_t key)
+    {
+        if (!root) return -1;
+        AVLTreeNode *cur = root, *prev = root;
+        key_t ret = -1;
+
+        while (cur != nullptr) {
+            if ( cur->getKey() >= key && (cur->getKey() < ret || ret == -1) ) ret = cur->getKey();
+            prev = cur;
+
+            if (key == cur->getKey())
+                return key;
+
+            if (key < cur->getKey())
+                cur = cur->left;
+            else if (key > cur->getKey())
+                cur = cur->right;
+        }
+        
+        return ret;
+    }
+
 };
 
 
 
 int main()
 {
-    AVLTree <int> tree (1);
-    tree.insert(2);
-    tree.insert(2);
-    tree.insert(2);
-    tree.insert(3);
-    tree.insert(4);
-    tree.insert(5);
-    tree.insert(6);
-    tree.insert(7);
-    tree.insert(-3);
-    tree.showTree();
+    const int magic_constant = 1000000000;
+    AVLTree <int> tree;
     
+    int n = 0, tmp = 0, add = 0;
+    char format = 0;
+    std::cin >> n;
+    bool needToAdd = false;
+    for (int i = 0; i < n; ++i) {
+        std::cin >> format;
+        std::cin >> tmp;
+        if (format == '+') {
+            if (needToAdd) {
+                tmp = (add+tmp) % magic_constant;
+                needToAdd = false;
+            }
+            tree.insert(tmp);
+        }        
+        if (format == '?') {
+            needToAdd = true;
+            add = tree.next(tmp);
+            std::cout << add << std::endl;
+        }
+    }
     
     return 0;
 }

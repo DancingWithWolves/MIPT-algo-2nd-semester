@@ -1,0 +1,11 @@
+digraph {
+6381168 [ label = "key = 1
+ height = 2
+ size = 2
+ balance = 1" ]
+6381168 -> 6381216
+6381216 [ label = "key = 2
+ height = 1
+ size = 1
+ balance = 0" ]
+}
