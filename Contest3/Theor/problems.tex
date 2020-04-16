@@ -1,0 +1,113 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+%--------------------------------------
+ 
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{verbatim}
+\usepackage[normalem]{ulem}
+ 
+%--------------------------------------
+\usepackage{graphicx}                       %Вставка картинок правильная
+\usepackage{float}                          %"Плавающие" картинки
+\usepackage{wrapfig}                        %Обтекание фигур (таблиц, картинок и прочего)
+\graphicspath{{images/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%--------------------------------------
+ 
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+ 
+\newenvironment{theorem}[2][Теорема]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Лемма]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Упражнение]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Задача]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{statement}[2][Утв.]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Следствие]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\newenvironment{solution}{\begin{proof}[Решение]}{\end{proof}}
+ 
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Домашняя работа №3}
+\author{Тетерин Дмитрий, Б05-932}
+\date{16.04.2020}
+ 
+\maketitle
+
+
+
+\begin{problem}{1}
+    Предложите метод слияния двух AVL-деревьев за O(log(|T1| + |T2|)) (все ключи левого
+дерева меньше всех ключей правого).
+\end{problem}
+
+\begin{solution}
+    Приведём алгоритм и будем на каждом его шаге доказывать, что мы не выходим за предложенную ассимптотику.
+    \\1. Определим высоту сливаемых деревьев. В моей реализации AVL-деревьев (см. контест) это $O(1)$. 
+    \\2. Удалим самый правый элемент $\alpha$ из левого дерева (либо самый левый из правого, если левое дерево оказалось выше), предварительно запомнив его. $O(log |T1|)$
+    \\3. В правом (или, соответственно, левом, если левое было выше) дереве будем идти влево (вправо), пока не найдём элемент $\beta$, в котором поддерево не более чем на 1 выше левого (правого). $O(log |T2|)$
+    \\4. Заменяем $\beta_{new}\rightarrow key = \alpha\rightarrow key; \beta_{new}\rightarrow left = left\_tree; \beta_{new}\rightarrow right = \beta$. $O(1)$
+    \\5. Увеличиваем баланс родителя. Сама $\beta$ уже сбалансирована. $O(1)$
+    \\6. Восстанавливаем баланс, как сделали бы после обычной вставки $\beta$. $O(log (|T1| + |T2|)$.
+    Таким образом, мы слили два AVL-дерева с ассимптотикой $O(log(|T1|+|T2|))$ и задача решена.
+\end{solution}
+
+\newpage
+\begin{problem}{4}
+    Пусть дано декартово дерево. Не ухудшая асимптотику стандартных операций, находясь в вершине,
+предложите метод поиска следующей в естественном порядке. Более формально, если алгоритм находится в вершине v с ключом x, как попасть в вершину u с минимальным ключом z > x? Асимптотика
+ответа на запрос:
+\\а) O(log n) в среднем;
+\\б) O(1).
+\end{problem}
+
+\begin{solution}
+    а) Когда мы находимся в вершине с ключом $x$, найдём самый левый элемент её правого поддерева. Т.к. \sout{курево} Декартово дерево остаётся обычным деревом поиска, этот алгоритм даст нам ответ за $O(log n)$.
+    \\б) Для асимптотики $O(1)$ будем глобально в дереве поддерживать указатели на начало и конец двусвязного списка, а в каждой вершине дерева -- указатели на следующий и предыдущий элементы этого списка, отсортированного
+    по возрастанию ключей. Тогда, находясь в вершине с ключом $x$, мы находим ответ за $O(1)$. 
+    \\Поддержание такого списка обеспечивается простым фиксом функции вставки в дерево: если вставляемый элемент больше родителя, то вставим его между родителем и его последующим элементом, иначе -- между родителем и его предыдущим элементом. Стоимость этого фикса - $O(1)$. Аналогично с удалением. Асимптотика стандартных операций с деревом не ухудшилась. 
+
+\end{solution}
+
+\newpage
+\begin{problem}{5}
+    Дано взвешенное дерево, то есть на каждом ребре написано некоторое целое (возможно,
+отрицательное) число. Найдите в нём простой путь с наибольшей суммой. Асимптотика: O(n), где n –
+число вершин в дереве.
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+ 
+ 
+ 
+ 
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+ 
+\end{document}
