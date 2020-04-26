@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1587671010 "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.tex" "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.pdf" "problems" 1587671010
+["pdflatex"] 1587908140 "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.tex" "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.pdf" "problems" 1587908140
   "/etc/texmf/web2c/texmf.cnf" 1587044421 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/dimoha_zadira/.texlive2017/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1587045319 3308 eee81981029f67083258db36df06e523 ""
   "/home/dimoha_zadira/.texlive2017/texmf-var/fonts/tfm/lh/lh-t2a/larm0600.tfm" 1587049324 3248 7c0b9d76a2cd84ed06764a4c6eea5de4 ""
@@ -9,8 +9,8 @@
   "/home/dimoha_zadira/.texlive2017/texmf-var/fonts/tfm/lh/lh-t2a/larm2074.tfm" 1587044966 3264 03c2b9e4787a40d3b9c197c38b93b558 ""
   "/home/dimoha_zadira/.texlive2017/texmf-var/fonts/tfm/lh/lh-t2a/lati1200.tfm" 1587045321 3512 f3a56cfe95a159371df20f73d1eb107d ""
   "/home/dimoha_zadira/.texlive2017/texmf-var/fonts/tfm/lh/lh-t2a/latt1200.tfm" 1587057212 1272 bf3bb5cc29880b269c8bcb412a1ac6e2 ""
-  "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.aux" 1587671010 50 0fef47af310be850185ccf42e00e9455 ""
-  "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.tex" 1587671009 14563 ef701a65a48cee52fee17f5280183e2b ""
+  "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.aux" 1587908140 50 0fef47af310be850185ccf42e00e9455 ""
+  "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.tex" 1587908139 14673 baa32bc9bb645a913ef922209774855b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -101,11 +101,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1587044455 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1587044480 4130079 9e6354b83dea52a6e499bb95a68e52fc ""
-  "problems.aux" 1587671010 50 0fef47af310be850185ccf42e00e9455 ""
-  "problems.tex" 1587671009 14563 ef701a65a48cee52fee17f5280183e2b ""
+  "problems.aux" 1587908140 50 0fef47af310be850185ccf42e00e9455 ""
+  "problems.tex" 1587908139 14673 baa32bc9bb645a913ef922209774855b ""
   (generated)
-  "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.pdf"
   "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.log"
-  "problems.pdf"
   "problems.aux"
   "problems.log"
+  "problems.pdf"
+  "/home/dimoha_zadira/Work/MIPT/clearMIPT/Contest3/Theor/problems.pdf"
