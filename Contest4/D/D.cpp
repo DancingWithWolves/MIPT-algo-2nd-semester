@@ -3,23 +3,9 @@
 #include <vector>
 #include <limits>
  
-size_t min_2pow(size_t n){
-    size_t k = 1;
-   
-    while (k <= n){
-        k *= 2;
-    }
+size_t max (size_t a, size_t b) {return (a > b) ? a : b;}
  
-    return k;
-}
- 
-size_t max(size_t a, size_t b){
-    return (a>b)?(a):(b);
-}
- 
-size_t min(size_t a, size_t b){
-    return (b>a)?(a):(b);
-}
+size_t min(size_t a, size_t b) {return (b > a) ? a : b;}
  
 struct pair_t {
     int first = 0;
